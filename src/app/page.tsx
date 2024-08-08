@@ -1,31 +1,42 @@
 "use client";
 import Input from "@/components/common/Input";
+import { setQuery } from "@/store/slices/languageModelSlice";
+import { RootState } from "@/store/store";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { CgAttachment } from "react-icons/cg";
+import { connect, ConnectedProps } from "react-redux";
 
-export default function Home() {
-  const [message, setMessage] = useState('');
-  const llmStream = async () => {
-    await fetchEventSource('http://localhost:8000/chat?query=hey', {
-      onmessage(ev) {
-        setMessage((pre) => pre + ev.data);
-      }
-    });
-  }
+type P = {} & ReduxProps
+
+const Home:FC<P> = ({ query, setQuery }) => {
+  
 
   return (
     <div className=" bg-[#333333] max-w-5xl mx-auto w-full min-h-screen flex flex-col justify-between px-4">
 
-      <div className=" h-2/3 flex-grow overflow-auto">
-        {message}
-      </div>
+      <div className=" h-2/3 flex-grow overflow-auto ">
+
+      </div>  
 
       <div className="w-full  mb-4 flex items-center relative text-white ">
         <CgAttachment size={20} className="absolute left-4  " />
-        <Input type="text" className=" bg-[#4D4D4D] border-none focus:outline-none pl-12 py-3  placeholder:text-[#ececec] text-[#ececec]" />
-      <button onClick={llmStream} className="w-full bg-[#FFA800] text-white py-3 rounded-lg">Start LLM</button>
+        <Input value={query} onChange={(e)=>setQuery(e.target.value)} type="text" className=" bg-[#4D4D4D] border-none focus:outline-none pl-12 py-3  placeholder:text-[#ececec] text-[#ececec]" />
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state:RootState) => {
+  return {
+    query: state.language_model.query
+  }
+}
+const mapDispatchToProps = {
+  setQuery
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type ReduxProps = ConnectedProps<typeof connector>;
+
+export default connector(Home);
