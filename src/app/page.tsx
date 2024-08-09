@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/components/common/Input";
 import { getQuery } from "@/store/selectors/llmSelector";
-import { setQuery } from "@/store/slices/languageModelSlice";
+import { setQuery, startLLM } from "@/store/slices/languageModelSlice";
 import { RootState } from "@/store/store";
 import { FC } from "react";
 import { CgAttachment } from "react-icons/cg";
@@ -9,7 +9,7 @@ import { connect, ConnectedProps } from "react-redux";
 
 type P = {} & ReduxProps
 
-const Home: FC<P> = ({ query, setQuery }) => {
+const Home: FC<P> = ({ query, setQuery, startLLM }) => {
   
   return (
     <main className="bg-[#333333]">
@@ -19,10 +19,10 @@ const Home: FC<P> = ({ query, setQuery }) => {
 
         </div>
 
-        <div className="w-full  mb-4 flex items-center relative text-white ">
+        <form className="w-full  mb-4 flex items-center relative text-white " onSubmit={()=>startLLM(query)}>
           <CgAttachment size={20} className="absolute left-4  " />
           <Input value={query} onChange={(e) => setQuery(e.target.value)} type="text" className=" bg-[#4D4D4D] border-none focus:outline-none pl-12 py-3  placeholder:text-[#ececec] text-[#ececec]" />
-        </div>
+        </form>
       </div>
     </main>
   );
@@ -33,7 +33,7 @@ const mapStateToProps = (state: RootState) => {
     query: getQuery(state)
   }
 }
-const mapDispatchToProps = { setQuery }
+const mapDispatchToProps = { setQuery, startLLM }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
