@@ -5,7 +5,8 @@ import { rootSaga, sagaMiddleware } from "./saga";
 const store = configureStore({
     reducer:{
         language_model:languageModelSlice
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 })
 
 sagaMiddleware.run(rootSaga)
