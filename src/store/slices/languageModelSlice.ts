@@ -6,8 +6,8 @@ const languageModelSlice = createSlice({
         query: "",
         loading: false,
         totalSavedMessages:0,
-        messages:{} as { [id:number]: string },
-        questions:{} as { [id:number]: string }
+        messages:{} as { [id:string]: string },
+        questions:{} as { [id:string]: string }
     },
     reducers: {
         setLanguageModel: (state, action) => {
@@ -21,9 +21,11 @@ const languageModelSlice = createSlice({
             const Next = state.totalSavedMessages + 1
             state.totalSavedMessages = Next;
             state.questions = { ...state.questions, [Next]: state.query }
+            state.query = ""
         },
         streamUpdate:(state, action)=>{
-            state.messages[state.totalSavedMessages] += action.payload;
+            const currentMessage = state.messages[state.totalSavedMessages]
+            state.messages[state.totalSavedMessages] =currentMessage ? currentMessage + action.payload : ""+action.payload;
         }
     },
 })
