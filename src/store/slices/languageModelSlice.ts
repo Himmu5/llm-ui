@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const languageModelSlice = createSlice({
     name: "language_Model",
@@ -16,12 +15,12 @@ const languageModelSlice = createSlice({
         setQuery:(state, action)=>{
              state.query = action.payload
         },
-        startLLM:(state)=>{
+        startLLM:(state, action:PayloadAction<string>)=>{
             state.loading = true
             state.totalSavedMessages++;
         },
         streamUpdate:(state, action)=>{
-            state.messages[state.totalSavedMessages] +=action.payload;
+            state.messages[state.totalSavedMessages] += action.payload;
         }
     },
 })

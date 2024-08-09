@@ -1,14 +1,14 @@
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import { eventChannel } from "redux-saga";
 
-const streamCall = async (query:string)=>{
-    let emit: any;
+const streamCall = (query:string)=>{
+    var emit: any;
     const chan = eventChannel((emitter) => {
         emit = emitter;
-        return () => {};
+        return () => ("");
     });
     const URL = 'http://localhost:8000/chat'+`?query=${query}`
-    await fetchEventSource(URL, {
+    fetchEventSource(URL, {
         onmessage(ev) {
             emit(ev.data);
         }

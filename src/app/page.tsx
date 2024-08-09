@@ -10,7 +10,11 @@ import { connect, ConnectedProps } from "react-redux";
 type P = {} & ReduxProps
 
 const Home: FC<P> = ({ query, setQuery, startLLM }) => {
-  
+  const handleKeyDown = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    startLLM(query);
+  };
+
   return (
     <main className="bg-[#333333]">
       <div className="  max-w-5xl mx-auto w-full min-h-screen flex flex-col justify-between px-4">
@@ -19,7 +23,7 @@ const Home: FC<P> = ({ query, setQuery, startLLM }) => {
 
         </div>
 
-        <form className="w-full  mb-4 flex items-center relative text-white " onSubmit={()=>startLLM(query)}>
+        <form className="w-full  mb-4 flex items-center relative text-white " onSubmit={handleKeyDown}>
           <CgAttachment size={20} className="absolute left-4  " />
           <Input value={query} onChange={(e) => setQuery(e.target.value)} type="text" className=" bg-[#4D4D4D] border-none focus:outline-none pl-12 py-3  placeholder:text-[#ececec] text-[#ececec]" />
         </form>
@@ -27,6 +31,7 @@ const Home: FC<P> = ({ query, setQuery, startLLM }) => {
     </main>
   );
 }
+
 
 const mapStateToProps = (state: RootState) => {
   return {
