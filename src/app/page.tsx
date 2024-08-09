@@ -2,15 +2,13 @@
 import Input from "@/components/common/Input";
 import { setQuery } from "@/store/slices/languageModelSlice";
 import { RootState } from "@/store/store";
-import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { CgAttachment } from "react-icons/cg";
 import { connect, ConnectedProps } from "react-redux";
 
 type P = {} & ReduxProps
 
 const Home:FC<P> = ({ query, setQuery }) => {
-  
 
   return (
     <div className=" bg-[#333333] max-w-5xl mx-auto w-full min-h-screen flex flex-col justify-between px-4">
