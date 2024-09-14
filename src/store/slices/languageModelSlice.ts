@@ -16,7 +16,7 @@ const languageModelSlice = createSlice({
         setQuery:(state, action)=>{
              state.query = action.payload
         },
-        startLLM:(state, action:PayloadAction<string>)=>{
+        startLLM:(state, action:PayloadAction<{fileName: string, query:string}>)=>{
             state.loading = true
             const Next = state.totalSavedMessages + 1
             state.totalSavedMessages = Next;

@@ -4,8 +4,8 @@ import { call, put, take } from "redux-saga/effects";
 import { streamUpdate } from "../slices/languageModelSlice";
 
 const getChatStream = function* (action: AnyAction): Generator<any, any, any> {
-    const query = action.payload
-    const emitStream = streamCall(query)
+    const {query, fileName} = action.payload
+    const emitStream = streamCall(query, fileName)
     yield call(processStream, emitStream)
 }
 

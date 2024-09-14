@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import languageModelSlice from "./slices/languageModelSlice";
 import { rootSaga, sagaMiddleware } from "./saga";
+import fileSlice from "./slices/fileSlice";
 
 const store = configureStore({
     reducer:{
-        language_model:languageModelSlice
+        language_model:languageModelSlice,
+        file:fileSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 })
