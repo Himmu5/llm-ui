@@ -1,24 +1,16 @@
 "use client";
 
-import { FC, useState } from "react";
-import { IoTrendingUp, IoTrendingDown, IoStatsChart, IoWallet, IoShieldCheckmark, IoSparkles } from "react-icons/io5";
-import { TbChartPie, TbReportMoney, TbScale, TbTarget, TbArrowUpRight, TbArrowDownRight } from "react-icons/tb";
-import { HiChartBar, HiCurrencyDollar } from "react-icons/hi2";
+import { FC } from "react";
+import { IoTrendingUp, IoStatsChart, IoWallet, IoShieldCheckmark, IoSparkles } from "react-icons/io5";
+import { TbChartPie, TbReportMoney, TbScale, TbTarget } from "react-icons/tb";
+import { HiCurrencyDollar } from "react-icons/hi2";
 
 type StudioPanelProps = {
   hasMessages: boolean;
   onGenerateSummary?: () => void;
 };
 
-// Mock market data
-const marketData = [
-  { symbol: "S&P 500", value: "4,567.23", change: "+1.24%", isPositive: true },
-  { symbol: "NASDAQ", value: "14,235.67", change: "+1.89%", isPositive: true },
-  { symbol: "DOW", value: "35,890.12", change: "-0.32%", isPositive: false },
-];
-
 const StudioPanel: FC<StudioPanelProps> = ({ hasMessages }) => {
-  const [selectedMetric, setSelectedMetric] = useState<string | null>(null);
 
   return (
     <aside className="studio-panel bg-[#0c1222] border-l border-[#1e293b]">
@@ -37,33 +29,6 @@ const StudioPanel: FC<StudioPanelProps> = ({ hasMessages }) => {
 
       {/* Content */}
       <div className="p-5 space-y-6 overflow-y-auto flex-1">
-        {/* Market Overview Card */}
-        <div className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
-              <HiChartBar className="w-4 h-4 text-violet-400" />
-              Market Overview
-            </h3>
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider">Live</span>
-          </div>
-          <div className="space-y-3">
-            {marketData.map((item) => (
-              <div key={item.symbol} className="flex items-center justify-between py-2 border-b border-slate-700/30 last:border-0">
-                <span className="text-sm text-slate-300 font-medium">{item.symbol}</span>
-                <div className="text-right">
-                  <p className="text-sm font-semibold text-white">{item.value}</p>
-                  <p className={`text-xs font-semibold flex items-center gap-0.5 justify-end ${
-                    item.isPositive ? "text-emerald-400" : "text-red-400"
-                  }`}>
-                    {item.isPositive ? <TbArrowUpRight className="w-3 h-3" /> : <TbArrowDownRight className="w-3 h-3" />}
-                    {item.change}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Quick Analysis Tools */}
         <div>
           <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
