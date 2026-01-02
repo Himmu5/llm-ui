@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useRef, useEffect } from "react";
+import scrollIntoView from "smooth-scroll-into-view-if-needed";
 import { Message } from "@/types";
 import { MessageBubble, StreamingMessage } from "./MessageBubble";
 import { TypingIndicator } from "./TypingIndicator";
@@ -34,9 +35,15 @@ export const ChatMessages: FC<ChatMessagesProps> = ({
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom
+  // Auto-scroll to bottom with smooth animation
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      scrollIntoView(messagesEndRef.current, {
+        behavior: "smooth",
+        block: "end",
+        scrollMode: "if-needed",
+      });
+    }
   }, [messages, streamingContent]);
 
   const isEmpty = messages.length === 0 && !streamingContent;
