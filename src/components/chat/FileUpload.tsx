@@ -25,18 +25,18 @@ function previewFile(file: any, callback: any) {
 }
 type P = {} & ReduxProps
 
-const FileUpload: FC<P> = ({ setFile, isFileUploaded, isUploaderOpen, closeUploader }) => {
+const FileUpload: FC<P> = ({ setFile, isUploaderOpen, closeUploader }) => {
   const [fileInfo, setFileInfo] = useState(null);
   return (
     <>
-      <AlertDialog open={isUploaderOpen || !isFileUploaded}>
+      <AlertDialog open={isUploaderOpen}>
         <AlertDialogContent>
-          {isUploaderOpen && <div className='flex items-center justify-between'>
+          <div className='flex items-center justify-between'>
             <div></div>
             <div><CgClose className='cursor-pointer' onClick={() => closeUploader()} /></div>
-          </div>}
+          </div>
           <AlertDialogHeader>
-            <AlertDialogTitle>Please upload a file to Investigate?</AlertDialogTitle>
+            <AlertDialogTitle>Upload a file (optional)</AlertDialogTitle>
             <Uploader
               onSuccess={(e) => {
                 setFile(e.filename)
@@ -67,7 +67,6 @@ const mapDispatchToProps = {
 };
 const mapStateToProps = (state: any) => {
   return {
-    isFileUploaded: state.file.isFileUpload,
     isUploaderOpen: state.file.isUploaderOpen
   }
 }

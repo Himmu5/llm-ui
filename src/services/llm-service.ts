@@ -7,7 +7,9 @@ const streamCall = (query:string, fileName: string)=>{
         emit = emitter;
         return () => ("");
     });
-    const URL = 'http://localhost:8000/llm/search'+`?query=${query}&fileName=${fileName}`;
+    const URL = fileName 
+        ? `http://localhost:8000/llm/search?query=${query}&fileName=${fileName}`
+        : `http://localhost:8000/llm/search?query=${query}`;
     fetchEventSource(URL, {
         onmessage(ev) {
             emit(ev.data);
