@@ -1,7 +1,8 @@
 "use client";
 
 import { FC, useRef, useCallback, FormEvent, KeyboardEvent } from "react";
-import { IoSend, IoStop, IoDocumentText } from "react-icons/io5";
+import { IoSend, IoStop } from "react-icons/io5";
+import { TbReportAnalytics } from "react-icons/tb";
 import { getPlaceholder } from "@/utils";
 
 interface ChatInputProps {
@@ -60,14 +61,16 @@ export const ChatInput: FC<ChatInputProps> = ({
   return (
     <div className="chat-input-area">
       {selectedCount > 0 && selectedLabel && (
-        <div className="flex items-center gap-2 mb-2 px-2 text-xs text-[var(--text-muted)]">
-          <IoDocumentText className="w-4 h-4 text-[var(--accent-primary)]" />
-          <span>
-            Answering from:{" "}
-            <span className="text-[var(--accent-primary)] font-medium">
-              {selectedLabel}
+        <div className="flex items-center gap-2 mb-3 px-2">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+            <TbReportAnalytics className="w-4 h-4 text-emerald-400" />
+            <span className="text-xs text-slate-400">
+              Analyzing:{" "}
+              <span className="text-emerald-400 font-semibold">
+                {selectedLabel}
+              </span>
             </span>
-          </span>
+          </div>
         </div>
       )}
       <form onSubmit={handleSubmit}>
@@ -86,16 +89,17 @@ export const ChatInput: FC<ChatInputProps> = ({
             <button
               type="button"
               onClick={onStop}
-              className="btn-icon flex items-center justify-center"
-              title="Stop"
+              className="btn-icon flex items-center justify-center hover:bg-red-500/10"
+              title="Stop Analysis"
             >
-              <IoStop className="w-5 h-5 text-red-500" />
+              <IoStop className="w-5 h-5 text-red-400" />
             </button>
           ) : (
             <button
               type="submit"
               disabled={!value?.trim()}
               className="btn-icon primary flex items-center justify-center"
+              title="Analyze"
             >
               <IoSend className="w-5 h-5" />
             </button>
@@ -107,4 +111,3 @@ export const ChatInput: FC<ChatInputProps> = ({
 };
 
 export default ChatInput;
-

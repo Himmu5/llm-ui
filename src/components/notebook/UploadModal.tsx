@@ -2,7 +2,7 @@
 
 import { FC, useState } from "react";
 import { IoClose, IoCloudUpload, IoCheckmarkCircle } from "react-icons/io5";
-import { HiDocumentArrowUp } from "react-icons/hi2";
+import { TbFileAnalytics, TbReportMoney } from "react-icons/tb";
 import { Uploader } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 
@@ -35,19 +35,19 @@ const UploadModal: FC<UploadModalProps> = ({ isOpen, onClose, onFileUploaded }) 
         <div className="modal-header">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-light)] to-[var(--accent-purple-light)] flex items-center justify-center">
-                <HiDocumentArrowUp className="w-5 h-5 text-[var(--accent-primary)]" />
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center border border-emerald-500/20">
+                <TbReportMoney className="w-6 h-6 text-emerald-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-[var(--text-primary)] tracking-tight">Add Source</h3>
-                <p className="text-xs text-[var(--text-muted)]">Upload documents for context</p>
+                <h3 className="text-lg font-bold text-white tracking-tight">Upload Financial Report</h3>
+                <p className="text-xs text-slate-400">Add company reports for AI analysis</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="btn-icon hover:bg-[var(--bg-hover)]"
+              className="btn-icon hover:bg-slate-800"
             >
-              <IoClose className="w-5 h-5" />
+              <IoClose className="w-5 h-5 text-slate-400" />
             </button>
           </div>
         </div>
@@ -56,11 +56,11 @@ const UploadModal: FC<UploadModalProps> = ({ isOpen, onClose, onFileUploaded }) 
         <div className="modal-body">
           {uploadedFile ? (
             <div className="flex flex-col items-center py-10 animate-fade-in">
-              <div className="w-20 h-20 rounded-2xl bg-[var(--accent-green-light)] flex items-center justify-center mb-5 animate-float">
-                <IoCheckmarkCircle className="w-12 h-12 text-[var(--accent-green)]" />
+              <div className="w-20 h-20 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-5 animate-float border border-emerald-500/20">
+                <IoCheckmarkCircle className="w-12 h-12 text-emerald-400" />
               </div>
-              <p className="text-[var(--text-primary)] font-semibold text-lg">{uploadedFile}</p>
-              <p className="text-sm text-[var(--accent-green)] mt-2 font-medium">Upload complete!</p>
+              <p className="text-white font-semibold text-lg">{uploadedFile}</p>
+              <p className="text-sm text-emerald-400 mt-2 font-medium">Report uploaded successfully!</p>
             </div>
           ) : (
             <Uploader
@@ -69,25 +69,25 @@ const UploadModal: FC<UploadModalProps> = ({ isOpen, onClose, onFileUploaded }) 
               onSuccess={handleSuccess}
               onUpload={() => setIsUploading(true)}
               onError={() => setIsUploading(false)}
-              accept=".pdf,.doc,.docx,.txt"
+              accept=".pdf,.doc,.docx,.txt,.xls,.xlsx"
             >
               <div className="upload-dropzone group">
                 {isUploading ? (
-                  <div className="flex flex-col items-center py-4">
-                    <div className="w-12 h-12 border-3 border-[var(--accent-primary)] border-t-transparent rounded-full animate-spin mb-4" />
-                    <p className="text-[var(--text-secondary)] font-medium">Uploading...</p>
-                    <p className="text-xs text-[var(--text-muted)] mt-1">Processing your document</p>
+                  <div className="flex flex-col items-center py-6">
+                    <div className="w-14 h-14 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-5" />
+                    <p className="text-white font-semibold">Processing Report...</p>
+                    <p className="text-xs text-slate-400 mt-2">Analyzing document structure</p>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center py-4">
-                    <div className="w-16 h-16 rounded-2xl bg-[var(--accent-light)] flex items-center justify-center mb-5 transition-transform group-hover:scale-110">
-                      <IoCloudUpload className="w-8 h-8 text-[var(--accent-primary)]" />
+                  <div className="flex flex-col items-center py-6">
+                    <div className="w-18 h-18 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 flex items-center justify-center mb-5 transition-all group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-emerald-500/10 border border-emerald-500/20">
+                      <TbFileAnalytics className="w-10 h-10 text-emerald-400" />
                     </div>
-                    <p className="text-[var(--text-primary)] font-semibold mb-1">
-                      Drop files here or click to browse
+                    <p className="text-white font-semibold mb-2">
+                      Drop financial reports here
                     </p>
-                    <p className="text-sm text-[var(--text-muted)]">
-                      PDF, DOC, DOCX, TXT up to 10MB
+                    <p className="text-sm text-slate-400">
+                      or click to browse your files
                     </p>
                   </div>
                 )}
@@ -97,20 +97,30 @@ const UploadModal: FC<UploadModalProps> = ({ isOpen, onClose, onFileUploaded }) 
 
           {/* Supported formats */}
           {!uploadedFile && (
-            <div className="mt-6 pt-6 border-t border-[var(--border-light)]">
-              <p className="text-xs font-medium text-[var(--text-muted)] mb-3 uppercase tracking-wide">Supported formats</p>
+            <div className="mt-6 pt-6 border-t border-slate-700/50">
+              <p className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Supported document types</p>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { name: "PDF", className: "format-badge pdf" },
-                  { name: "DOC", className: "format-badge doc" },
-                  { name: "DOCX", className: "format-badge docx" },
-                  { name: "TXT", className: "format-badge txt" },
+                  { name: "10-K Report", color: "emerald" },
+                  { name: "Annual Report", color: "teal" },
+                  { name: "Financial Statements", color: "cyan" },
+                  { name: "SEC Filings", color: "blue" },
                 ].map((format) => (
                   <span
                     key={format.name}
-                    className={format.className}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium bg-${format.color}-500/10 text-${format.color}-400 border border-${format.color}-500/20`}
                   >
                     {format.name}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {["PDF", "DOC", "DOCX", "TXT", "XLS", "XLSX"].map((ext) => (
+                  <span
+                    key={ext}
+                    className="px-2.5 py-1 rounded-md text-[10px] font-semibold bg-slate-800 text-slate-400 uppercase tracking-wider"
+                  >
+                    .{ext.toLowerCase()}
                   </span>
                 ))}
               </div>
@@ -120,7 +130,7 @@ const UploadModal: FC<UploadModalProps> = ({ isOpen, onClose, onFileUploaded }) 
 
         {/* Footer */}
         {!uploadedFile && (
-          <div className="modal-footer border-t border-[var(--border-light)]">
+          <div className="modal-footer border-t border-slate-700/50">
             <button onClick={onClose} className="btn btn-secondary">
               Cancel
             </button>
