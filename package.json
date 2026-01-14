@@ -30,7 +30,7 @@
     "react-spinners": "^0.14.1",
     "redux-saga": "^1.3.0",
     "remark-gfm": "^4.0.0",
-    "rsuite": "^5.70.2",
+    "rsuite": "^5.83.4",
     "smooth-scroll-into-view-if-needed": "^2.0.2",
     "streamdown": "^1.6.10",
     "tailwind-merge": "^2.5.2",
