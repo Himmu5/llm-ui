@@ -20,7 +20,7 @@
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "lucide-react": "^0.441.0",
-    "next": "^14.2.35",
+    "next": "^15.5.10",
     "pdf-reader-llm": "file:",
     "react": "^18",
     "react-dom": "^18",
@@ -32,7 +32,7 @@
     "remark-gfm": "^4.0.0",
     "rsuite": "^5.70.2",
     "smooth-scroll-into-view-if-needed": "^2.0.2",
-    "streamdown": "^1.6.10",
+    "streamdown": "^2.0.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
   },
